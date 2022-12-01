@@ -2,12 +2,12 @@ package presentation.login
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.vicert.his.databinding.ActivityLoginBinding
 import data.api.LoginResponse
 import utils.Resource
+import utils.toast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+       toast("Message from Toast")
     }
 
 }
