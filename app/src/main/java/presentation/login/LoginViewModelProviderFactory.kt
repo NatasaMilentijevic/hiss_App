@@ -9,6 +9,6 @@ class LoginViewModelProviderFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LoginViewModel(loginRepository) as T
+            return LoginActivityViewModel(loginRepository) as T
     }
 }

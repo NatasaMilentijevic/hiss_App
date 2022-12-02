@@ -1,19 +1,31 @@
 package presentation.login
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import data.api.LoginRequest
 import data.api.LoginResponse
+import di.RetroServiceInterface
 import utils.Resource
 import kotlinx.coroutines.launch
-import repository.LoginRepository
+import model.HisApplication
+import retrofit2.Call
+import retrofit2.Callback
+import javax.inject.Inject
 
-class LoginViewModel(
-    val userRepository: LoginRepository
+class LoginActivityViewModel(
+   application: Application
     ) : ViewModel() {
 
+    @Inject
+    lateinit var retroServiceInterface: RetroServiceInterface
+
     val loginResult: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
+
+    init {
+        (application as HisApplication).getRetroComponent().inject(this)
+    }
 
     fun loginUser(email: String, pwd: String) {
 
@@ -35,7 +47,14 @@ class LoginViewModel(
                 loginResult.value = Resource.Error(ex.message)
             }
         }
+    }
 
+    fun makeApiCall(){
+        val call: Call<> = retroServiceInterface.getDataFromAPI()
+        call?.enqueue(object : Callback<>{
 
+            //override fun: onFailure, onResponse
+
+        })
     }
 }

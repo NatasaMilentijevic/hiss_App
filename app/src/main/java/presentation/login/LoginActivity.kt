@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.databinding.ActivityLoginBinding
 import data.api.LoginResponse
 import utils.Resource
@@ -12,13 +13,17 @@ import utils.toast
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val viewModel by viewModels<LoginViewModel>()
+    private lateinit var loginActivityViewModel: LoginActivityViewModel
+
+    private val viewModel by viewModels<LoginActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        initViewModel()
 
         viewModel.loginResult.observe(this) {
             when (it) {
@@ -71,4 +76,7 @@ class LoginActivity : AppCompatActivity() {
        toast("Message from Toast")
     }
 
+    private fun initViewModel(){
+        loginActivityViewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
+    }
 }
