@@ -1,10 +1,9 @@
-package model
+package com.vicert.his
 
 import android.app.Application
-import dagger.internal.MapProviderFactory.builder
-import di.RetroComponent
-import di.RetroModule
-import java.util.stream.DoubleStream.builder
+import com.vicert.his.di.DaggerRetroComponent
+import com.vicert.his.di.RetroComponent
+import com.vicert.his.di.RetroModule
 
 class HisApplication : Application() {
 

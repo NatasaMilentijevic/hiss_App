@@ -1,4 +1,4 @@
-package utils
+package com.vicert.his.utils
 
 sealed class Resource<out T> {
     data class Success<out T>(val data: T? = null) : Resource<T>()

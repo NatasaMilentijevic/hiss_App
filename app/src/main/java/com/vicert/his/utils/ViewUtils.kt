@@ -1,4 +1,4 @@
-package utils
+package com.vicert.his.utils
 
 import android.content.Context
 import android.widget.Toast

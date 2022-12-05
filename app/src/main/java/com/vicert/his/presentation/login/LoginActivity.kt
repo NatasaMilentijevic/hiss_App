@@ -1,4 +1,4 @@
-package presentation.login
+package com.vicert.his.presentation.login
 
 import android.os.Bundle
 import android.view.View
@@ -6,9 +6,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.databinding.ActivityLoginBinding
-import data.api.LoginResponse
-import utils.Resource
-import utils.toast
+import com.vicert.his.data.api.LoginResponse
+import com.vicert.his.utils.Resource
+import com.vicert.his.utils.toast
 
 class LoginActivity : AppCompatActivity() {
 

@@ -1,13 +1,12 @@
-package di
+package com.vicert.his.di
 
 import dagger.Component
-import presentation.login.LoginActivity
-import presentation.login.LoginActivityViewModel
+import com.vicert.his.presentation.login.LoginActivityViewModel
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [RetroModule::class])
-class RetroComponent {
+interface RetroComponent {
 
     fun inject(loginViewModel: LoginActivityViewModel) {}
 }

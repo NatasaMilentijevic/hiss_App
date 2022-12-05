@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
-    id 'org.jetbrains.kotlin.kapt'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -74,6 +74,7 @@ dependencies {
 
     //Dagger2 dependency
     implementation 'com.google.dagger:dagger-android:2.35.1'
+    implementation 'com.google.dagger:dagger-android-support:2.35.1'
     kapt 'com.google.dagger:dagger-android-processor:2.20'
     kapt 'com.google.dagger:dagger-compiler:2.44'
 

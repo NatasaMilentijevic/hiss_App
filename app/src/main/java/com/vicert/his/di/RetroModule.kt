@@ -1,9 +1,9 @@
-package di
+package com.vicert.his.di
 import dagger.Module
-import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import utils.Constant.BASE_URL
+import com.vicert.his.utils.Constant.BASE_URL
+import dagger.Provides
 import javax.inject.Singleton
 
 @Module
@@ -11,13 +11,13 @@ class RetroModule {
 
     @Singleton
     @Provides
-    fun getRetroServiceInstanceInterface(retrofit: Retrofit): RetroServiceInterface{
+    fun getRetroServiceInstanceInterface(retrofit: Retrofit): RetroServiceInterface {
         return retrofit.create(RetroServiceInterface::class.java)
     }
 
     @Singleton
     @Provides
-    fun getRetroFitInstance() : Retrofit {
+    fun getRetrofitInstance() : Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
