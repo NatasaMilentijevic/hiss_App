@@ -32,11 +32,11 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 is Resource.Success -> {
-                    processLogin(it.data)
+                    toast(it.data?.token)
                 }
 
                 is Resource.Error -> {
-                    processError(it.msg)
+                    toast(it.msg)
                 }
                 else -> {
                     stopLoading()
@@ -62,18 +62,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun stopLoading() {
         binding.progressBarLogin.visibility = View.GONE
-    }
-
-    private fun processLogin(data: LoginResponse?) {
-        showToast("Success")
-    }
-
-    private fun processError(msg: String?) {
-        showToast("Error:" + msg)
-    }
-
-    private fun showToast(msg: String) {
-       toast("Message from Toast")
     }
 
     private fun initViewModel(){

@@ -11,7 +11,7 @@ class RetroModule {
 
     @Singleton
     @Provides
-    fun getRetroServiceInstanceInterface(retrofit: Retrofit): RetroServiceInterface {
+    fun getRetroServiceInstanceInterface(retrofit: Retrofit) : RetroServiceInterface {
         return retrofit.create(RetroServiceInterface::class.java)
     }
 
