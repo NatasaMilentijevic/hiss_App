@@ -1,9 +1,9 @@
 package com.vicert.his.di
+import com.vicert.his.utils.Constant.BASE_URL
 import dagger.Module
+import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.vicert.his.utils.Constant.BASE_URL
-import dagger.Provides
 import javax.inject.Singleton
 
 @Module
