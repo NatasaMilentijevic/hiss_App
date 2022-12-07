@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.HisApplication
 import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
-import com.vicert.his.utils.Resource
 import com.vicert.his.utils.toast
 import javax.inject.Inject
 
@@ -48,12 +46,11 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is LoginState.SuccessState -> {
                     toast(it.result?.token)
+                    stopLoading()
                 }
 
                 is LoginState.FailState -> {
                     toast(it.msg)
-                }
-                else -> {
                     stopLoading()
                 }
             }
@@ -70,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(i)
                 finish()
             } else {
-                toast("Login failed. Please try again. ")
+               stopLoading()
             }
         }
     }

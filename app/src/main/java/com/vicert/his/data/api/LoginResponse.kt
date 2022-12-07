@@ -3,14 +3,10 @@ package com.vicert.his.data.api
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-    @SerializedName("errors")
-    var errors: List<MutableList<String>>,
     @SerializedName("token")
     var token: String,
     @SerializedName("result")
-    var result: Result,
-    @SerializedName("roles")
-    var roles: String
+    var result: Result
 )
 
 data class Result(

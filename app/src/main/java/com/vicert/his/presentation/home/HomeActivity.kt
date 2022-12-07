@@ -19,8 +19,6 @@ class HomeActivity : AppCompatActivity() {
 
         var user: HashMap<String, String> = session.getUserDetais()
 
-        var email = user.get(LoginPref.KEY_EMAIL)
-        var pwd = user.get(LoginPref.KEY_PASSWORD)
 
 
 
