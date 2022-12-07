@@ -1,24 +1,24 @@
 package com.vicert.his
 
 import android.app.Application
-import com.vicert.his.di.DaggerRetroComponent
-import com.vicert.his.di.RetroComponent
+import com.vicert.his.di.DaggerMainComponent
+import com.vicert.his.di.MainComponent
 import com.vicert.his.di.RetroModule
 
 class HisApplication : Application() {
 
-    private lateinit var retroComponent: RetroComponent
+    private lateinit var mainComponent: MainComponent
 
     override fun onCreate() {
         super.onCreate()
 
-        retroComponent = DaggerRetroComponent.builder()
+        mainComponent = DaggerMainComponent.builder()
             .retroModule(RetroModule())
             .build()
     }
 
-    fun getRetroComponent(): RetroComponent {
-        return retroComponent
+    fun getMainComponent(): MainComponent {
+        return mainComponent
     }
 }
 

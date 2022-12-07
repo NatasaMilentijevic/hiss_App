@@ -5,37 +5,43 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vicert.his.data.api.LoginRequest
 import com.vicert.his.data.api.LoginResponse
-import com.vicert.his.di.RetroServiceInterface
+import com.vicert.his.data.remote.UserRepository
 import com.vicert.his.utils.Resource
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class LoginActivityViewModel() : ViewModel() {
+class LoginActivityViewModel(
+    val remoteRepository: UserRepository
+) : ViewModel() {
 
-    @Inject
-    lateinit var retroServiceInterface: RetroServiceInterface
-
-    val loginResult: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
+    val loginResult: MutableLiveData<LoginState> = MutableLiveData()
 
     fun loginUser(email: String, pwd: String) {
-
-        loginResult.value = Resource.Loading
+        loginResult.value = LoginState.LoadingState
         viewModelScope.launch {
             try {
                 val loginRequest = LoginRequest(
                     password = pwd,
                     email = email
                 )
-                val response = retroServiceInterface.loginUser(loginRequest = loginRequest)
-                if (response.code() == 200) {
-                    loginResult.value = Resource.Success(response.body())
-                } else {
-                    loginResult.value = Resource.Error(response.message())
+
+                when (val response = remoteRepository.getUserLogin(loginRequest = loginRequest)) {
+                    is Resource.Success -> {
+                        loginResult.postValue(LoginState.SuccessState(response.data))
+                    }
+                    is Resource.Error -> {
+                        loginResult.postValue(LoginState.FailState(response.msg))
+                    }
                 }
 
             } catch (ex: Exception) {
-                loginResult.value = Resource.Error(ex.message)
+                loginResult.postValue(LoginState.FailState(ex.message))
             }
         }
     }
+}
+
+sealed class LoginState() {
+    data class SuccessState(val result: LoginResponse?): LoginState()
+    object LoadingState: LoginState()
+    data class FailState(val msg: String?): LoginState()
 }

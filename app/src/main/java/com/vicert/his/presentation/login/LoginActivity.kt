@@ -6,21 +6,28 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.vicert.his.HisApplication
 import com.vicert.his.databinding.ActivityLoginBinding
+import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
 import com.vicert.his.utils.Resource
 import com.vicert.his.utils.toast
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginActivityViewModel: LoginActivityViewModel
     lateinit var session: LoginPref
 
-    private val viewModel by viewModels<LoginActivityViewModel>()
+    @Inject
+    lateinit var loginVMFactory: ViewModelFactory<LoginActivityViewModel>
+
+    private val viewModel: LoginActivityViewModel by viewModels { loginVMFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as HisApplication).getMainComponent().inject(this)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -34,19 +41,16 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        initViewModel()
-
         viewModel.loginResult.observe(this) {
             when (it) {
-                is Resource.Loading -> {
+                is LoginState.LoadingState -> {
                     showLoading()
                 }
-
-                is Resource.Success -> {
-                    toast(it.data?.token)
+                is LoginState.SuccessState -> {
+                    toast(it.result?.token)
                 }
 
-                is Resource.Error -> {
+                is LoginState.FailState -> {
                     toast(it.msg)
                 }
                 else -> {
@@ -78,9 +82,5 @@ class LoginActivity : AppCompatActivity() {
 
     private fun stopLoading() {
         binding.progressBarLogin.visibility = View.GONE
-    }
-
-    private fun initViewModel() {
-        loginActivityViewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
     }
 }
