@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vicert.his.R
 import com.vicert.his.presentation.login.LoginPref
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -14,15 +15,15 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         session = LoginPref(this)
-
         session.checkLogin()
 
         var user: HashMap<String, String> = session.getUserDetais()
 
+        var token = user.get(LoginPref.KEY_TOKEN)
 
-
-
-
+        btnLogout.setOnClickListener{
+            session.logoutUser()
+        }
 
     }
 }
