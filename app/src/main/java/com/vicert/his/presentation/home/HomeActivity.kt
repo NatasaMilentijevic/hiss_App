@@ -2,26 +2,25 @@ package com.vicert.his.presentation.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.vicert.his.R
+import com.vicert.his.databinding.ActivityHomeBinding
 import com.vicert.his.presentation.login.LoginPref
-import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var session: LoginPref
+    private lateinit var binding: ActivityHomeBinding
+    private lateinit var session: LoginPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        session = LoginPref(this)
-        session.checkLogin()
+        // var user: HashMap<String, String> = session.getUserDetails()
 
-        var user: HashMap<String, String> = session.getUserDetais()
-
-        var token = user.get(LoginPref.KEY_TOKEN)
-
-        btnLogout.setOnClickListener{
+        binding.btnLogout.setOnClickListener {
+            session.getUserDetails()
+            session = LoginPref(this)
+            session.checkLogin()
             session.logoutUser()
         }
 
