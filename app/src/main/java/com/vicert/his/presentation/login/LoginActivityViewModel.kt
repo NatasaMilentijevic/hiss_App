@@ -8,6 +8,7 @@ import com.vicert.his.data.api.LoginResponse
 import com.vicert.his.data.remote.UserRepository
 import com.vicert.his.utils.Resource
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class LoginActivityViewModel(
     val remoteRepository: UserRepository
@@ -41,13 +42,27 @@ class LoginActivityViewModel(
             }
         }
     }
-    private fun loginValidation(email: String, password: String): Boolean {
-        return if (email.isEmpty() || password.isEmpty()) {
+    val emailAdressPattern = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
+
+    fun loginValidation(email: String, password: String): Boolean {
+        return if (email.isEmpty() || password.isEmpty() && !isValidString(email) && !isValidString(password))  {
             false
         } else {
             password.length >= 6
         }
     }
+    fun isValidString(str: String): Boolean{
+        return emailAdressPattern.matcher(str).matches()
+    }
+
 }
 
 sealed class LoginState() {

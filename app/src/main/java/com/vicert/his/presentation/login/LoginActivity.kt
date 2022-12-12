@@ -10,6 +10,7 @@ import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
 import com.vicert.his.utils.toast
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -58,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
             val email = binding.editTextEmailAddress.text.toString().trim()
             val pwd = binding.editTextPassword.text.toString().trim()
+
             viewModel.loginUser(email = email, pwd = pwd)
 
             if (session.isLoggedIn()) {
@@ -65,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(i)
                 finish()
             }
+
         }
     }
 
