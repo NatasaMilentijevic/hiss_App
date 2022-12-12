@@ -33,8 +33,7 @@ class LoginActivity : AppCompatActivity() {
         session = LoginPref(this)
 
         if (session.isLoggedIn()) {
-            var i: Intent = Intent(applicationContext, HomeActivity::class.java)
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val i = Intent(applicationContext, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(i)
             finish()
         }
@@ -61,17 +60,13 @@ class LoginActivity : AppCompatActivity() {
             val pwd = binding.editTextPassword.text.toString().trim()
             viewModel.loginUser(email = email, pwd = pwd)
 
-            if (email.isEmpty()) {
-                session.createLoginSession(email, pwd)
-                var i: Intent = Intent(applicationContext, HomeActivity::class.java)
+            if (session.isLoggedIn()) {
+                val i = Intent(applicationContext, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(i)
                 finish()
-            } else {
-               stopLoading()
             }
         }
     }
-
 
     private fun showLoading() {
         binding.progressBarLogin.visibility = View.VISIBLE

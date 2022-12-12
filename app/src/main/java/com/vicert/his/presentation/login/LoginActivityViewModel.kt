@@ -19,6 +19,9 @@ class LoginActivityViewModel(
         loginResult.value = LoginState.LoadingState
         viewModelScope.launch {
             try {
+                if(!loginValidation(email, pwd)) {
+                    loginResult.postValue(LoginState.FailState("Invalid input. Please, try again."))
+                }
                 val loginRequest = LoginRequest(
                     password = pwd,
                     email = email
@@ -36,6 +39,13 @@ class LoginActivityViewModel(
             } catch (ex: Exception) {
                 loginResult.postValue(LoginState.FailState(ex.message))
             }
+        }
+    }
+    private fun loginValidation(email: String, password: String): Boolean {
+        return if (email.isEmpty() || password.isEmpty()) {
+            false
+        } else {
+            password.length >= 6
         }
     }
 }

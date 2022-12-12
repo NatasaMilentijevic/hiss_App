@@ -23,11 +23,6 @@ class LoginPref {
         val KEY_TOKEN = "token"
     }
 
-    fun createLoginSession(token: String, pwd: String) {
-        editor.putBoolean(IS_LOGIN, true)
-        editor.commit()
-    }
-
     fun checkLogin() {
         if (!this.isLoggedIn()) {
             var i: Intent = Intent(con, LoginActivity::class.java)
@@ -38,7 +33,7 @@ class LoginPref {
     }
 
     fun getUserDetais(): HashMap<String, String> {
-        var user: Map<String, String> = HashMap<String, String>()
+        var user: Map<String, String> = HashMap()
         (user as HashMap).put(KEY_TOKEN, pref.getString(KEY_TOKEN, null)!!)
         return user
     }
