@@ -1,4 +1,4 @@
-package com.vicert.his.data.api
+package com.vicert.his.data.api.login
 
 import com.google.gson.annotations.SerializedName
 

@@ -3,8 +3,8 @@ package com.vicert.his.presentation.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vicert.his.data.api.LoginRequest
-import com.vicert.his.data.api.LoginResponse
+import com.vicert.his.data.api.login.LoginRequest
+import com.vicert.his.data.api.login.LoginResponse
 import com.vicert.his.data.remote.UserRepository
 import com.vicert.his.utils.Constant
 import com.vicert.his.utils.Resource
