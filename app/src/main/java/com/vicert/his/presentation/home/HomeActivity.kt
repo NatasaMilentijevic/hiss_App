@@ -15,11 +15,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // var user: HashMap<String, String> = session.getUserDetails()
-
         binding.btnLogout.setOnClickListener {
-            session.getUserDetails()
             session = LoginPref(this)
+            session.getUserDetails()
             session.checkLogin()
             session.logoutUser()
         }

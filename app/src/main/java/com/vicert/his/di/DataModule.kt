@@ -13,6 +13,6 @@ class DataModule {
     @Provides
     fun providerRemoteRepo(
         retroServiceInterface: RetroServiceInterface
-    ): UserRepository = UserRepositoryImpl (retroServiceInterface)
+    ): UserRepository = UserRepositoryImpl(retroServiceInterface)
 
 }

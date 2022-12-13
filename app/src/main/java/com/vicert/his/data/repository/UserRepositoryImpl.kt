@@ -18,5 +18,4 @@ class UserRepositoryImpl(
             Resource.Error(e.message)
         }
     }
-
 }

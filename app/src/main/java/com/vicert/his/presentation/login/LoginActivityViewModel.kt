@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.vicert.his.data.api.LoginRequest
 import com.vicert.his.data.api.LoginResponse
 import com.vicert.his.data.remote.UserRepository
+import com.vicert.his.utils.Constant
 import com.vicert.his.utils.Resource
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
@@ -20,7 +21,7 @@ class LoginActivityViewModel(
         loginResult.value = LoginState.LoadingState
         viewModelScope.launch {
             try {
-                if(!loginValidation(email, pwd)) {
+                if (!loginValidation(email, pwd)) {
                     loginResult.postValue(LoginState.FailState("Invalid input. Please, try again."))
                 }
                 val loginRequest = LoginRequest(
@@ -42,31 +43,27 @@ class LoginActivityViewModel(
             }
         }
     }
-    val emailAdressPattern = Pattern.compile(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+"
-    )
 
-    fun loginValidation(email: String, password: String): Boolean {
-        return if (email.isEmpty() || password.isEmpty() && !isValidString(email) && !isValidString(password))  {
+    private val emailAddressPattern = Pattern.compile(Constant.EMAIL_ADDRESS_PATTERN)
+
+    private fun loginValidation(email: String, password: String): Boolean {
+        return if (email.isEmpty() || password.isEmpty() && !isValidString(email) && !isValidString(
+                password
+            )
+        ) {
             false
         } else {
             password.length >= 6
         }
     }
-    fun isValidString(str: String): Boolean{
-        return emailAdressPattern.matcher(str).matches()
-    }
 
+    private fun isValidString(str: String): Boolean {
+        return emailAddressPattern.matcher(str).matches()
+    }
 }
 
-sealed class LoginState() {
-    data class SuccessState(val result: LoginResponse?): LoginState()
-    object LoadingState: LoginState()
-    data class FailState(val msg: String?): LoginState()
+sealed class LoginState {
+    data class SuccessState(val result: LoginResponse?) : LoginState()
+    object LoadingState : LoginState()
+    data class FailState(val msg: String?) : LoginState()
 }

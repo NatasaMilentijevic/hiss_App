@@ -3,51 +3,45 @@ package com.vicert.his.presentation.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import com.vicert.his.utils.Constant
 
-class LoginPref {
+class LoginPref(private var con: Context) {
 
-    lateinit var pref: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
-    lateinit var con: Context
-    var PRIVATEMODE: Int = 0
+    private var pref: SharedPreferences
+    private var editor: SharedPreferences.Editor
+    private var privateMode: Int = 0
 
-    constructor(con: Context) {
-        this.con = con
-        pref = con.getSharedPreferences(PREF_NAME, PRIVATEMODE)
+    init {
+        pref = con.getSharedPreferences(Constant.PREF_NAME, privateMode)
         editor = pref.edit()
     }
 
-    companion object {
-        val PREF_NAME = "Login_Preference"
-        val IS_LOGIN = "isLogin"
-        val KEY_TOKEN = "token"
-    }
 
     fun checkLogin() {
         if (!this.isLoggedIn()) {
-            var i: Intent = Intent(con, LoginActivity::class.java)
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val i = Intent(con, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             con.startActivity(i)
         }
     }
 
-    fun getUserDetais(): HashMap<String, String> {
-        var user: Map<String, String> = HashMap()
-        (user as HashMap).put(KEY_TOKEN, pref.getString(KEY_TOKEN, null)!!)
+    fun getUserDetails(): HashMap<String, String> {
+        val user: Map<String, String> = HashMap()
+        (user as HashMap).put(Constant.KEY_TOKEN, pref.getString(Constant.KEY_TOKEN, null)!!)
         return user
     }
 
     fun logoutUser() {
         editor.clear()
         editor.commit()
-        var i: Intent = Intent(con, LoginActivity::class.java)
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val i = Intent(con, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+
         con.startActivity(i)
     }
 
     fun isLoggedIn(): Boolean {
-        return pref.getBoolean(IS_LOGIN, false)
+        return pref.getBoolean(Constant.IS_LOGIN, false)
     }
 }

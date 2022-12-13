@@ -10,13 +10,12 @@ import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
 import com.vicert.his.utils.toast
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    lateinit var session: LoginPref
+    private lateinit var session: LoginPref
 
     @Inject
     lateinit var loginVMFactory: ViewModelFactory<LoginActivityViewModel>
@@ -27,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         (application as HisApplication).getMainComponent().inject(this)
 
+        val homeIntent =
+            Intent(this, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -34,8 +35,7 @@ class LoginActivity : AppCompatActivity() {
         session = LoginPref(this)
 
         if (session.isLoggedIn()) {
-            val i = Intent(applicationContext, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(i)
+            startActivity(homeIntent)
             finish()
         }
 
@@ -45,8 +45,9 @@ class LoginActivity : AppCompatActivity() {
                     showLoading()
                 }
                 is LoginState.SuccessState -> {
-                    toast(it.result?.token)
                     stopLoading()
+                    startActivity(homeIntent)
+                    finish()
                 }
 
                 is LoginState.FailState -> {
@@ -61,12 +62,6 @@ class LoginActivity : AppCompatActivity() {
             val pwd = binding.editTextPassword.text.toString().trim()
 
             viewModel.loginUser(email = email, pwd = pwd)
-
-            if (session.isLoggedIn()) {
-                val i = Intent(applicationContext, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(i)
-                finish()
-            }
 
         }
     }

@@ -8,5 +8,5 @@ import retrofit2.http.POST
 interface RetroServiceInterface {
 
     @POST("identity/login")
-    suspend fun loginUser(@Body loginRequest: LoginRequest) : LoginResponse
+    suspend fun loginUser(@Body loginRequest: LoginRequest): LoginResponse
 }
