@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.HisApplication
+import com.vicert.his.data.api.login.ForgotPasswordSheet
 import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
@@ -22,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginActivityViewModel by viewModels { loginVMFactory }
 
+    private lateinit var forgotViewModel: LoginActivityViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as HisApplication).getMainComponent().inject(this)
@@ -29,8 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val homeIntent =
             Intent(this, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         session = LoginPref(this)
 
@@ -60,10 +63,14 @@ class LoginActivity : AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
             val email = binding.editTextEmailAddress.text.toString().trim()
             val pwd = binding.editTextPassword.text.toString().trim()
-
             viewModel.loginUser(email = email, pwd = pwd)
-
         }
+        forgotViewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
+
+        binding.buttonForgotPassword.setOnClickListener {
+            ForgotPasswordSheet().show(supportFragmentManager, "forgotPasswordTag")
+        }
+
     }
 
     private fun showLoading() {

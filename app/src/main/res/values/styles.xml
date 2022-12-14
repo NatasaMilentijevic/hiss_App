@@ -16,6 +16,7 @@
     <style name="button_primary">
         <item name="android:background">@drawable/bg_button_primary</item>
         <item name="android:textColor">@color/colorTextWhite</item>
+        <item name="android:layout_margin">@dimen/button_margin_size</item>
     </style>
 
     <style name="text_label_default">

@@ -16,6 +16,8 @@ class LoginActivityViewModel(
 ) : ViewModel() {
 
     val loginResult: MutableLiveData<LoginState> = MutableLiveData()
+    var oldPassword = MutableLiveData<String>()
+    var newPassword = MutableLiveData<String>()
 
     fun loginUser(email: String, pwd: String) {
         loginResult.value = LoginState.LoadingState
@@ -47,10 +49,7 @@ class LoginActivityViewModel(
     private val emailAddressPattern = Pattern.compile(Constant.EMAIL_ADDRESS_PATTERN)
 
     private fun loginValidation(email: String, password: String): Boolean {
-        return if (email.isEmpty() || password.isEmpty() && !isValidString(email) && !isValidString(
-                password
-            )
-        ) {
+        return if (email.isEmpty() || password.isEmpty() && !isValidString(email) && !isValidString(password)) {
             false
         } else {
             password.length >= 6
