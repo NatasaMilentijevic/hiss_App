@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.HisApplication
-import com.vicert.his.data.api.login.ForgotPasswordSheet
+import com.vicert.his.data.api.login.ResetPasswordSheet
 import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         forgotViewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
 
         binding.buttonForgotPassword.setOnClickListener {
-            ForgotPasswordSheet().show(supportFragmentManager, "forgotPasswordTag")
+            ResetPasswordSheet().show(supportFragmentManager, "forgotPasswordTag")
         }
 
     }

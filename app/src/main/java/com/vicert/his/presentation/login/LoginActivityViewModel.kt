@@ -16,8 +16,10 @@ class LoginActivityViewModel(
 ) : ViewModel() {
 
     val loginResult: MutableLiveData<LoginState> = MutableLiveData()
+    var email = MutableLiveData<String>()
     var oldPassword = MutableLiveData<String>()
     var newPassword = MutableLiveData<String>()
+    var confirmNewPassword = MutableLiveData<String>()
 
     fun loginUser(email: String, pwd: String) {
         loginResult.value = LoginState.LoadingState
