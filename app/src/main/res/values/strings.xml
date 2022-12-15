@@ -3,6 +3,8 @@
     <string name="app_name">HisApplication</string>
     <string name="email">Email</string>
     <string name="email_hint">example@gmail.com</string>
+    <string name="reset_email">Email :</string>
+    <string name="confirm_new_password">Confirm new password :</string>
     <string name="password">Password</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="login">Login</string>
