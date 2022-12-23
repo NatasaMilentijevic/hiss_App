@@ -17,6 +17,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.home.HomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="true">
             <meta-data
@@ -30,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.home.HomeActivity"
+            android:name=".presentation.login.ResetPasswordSheetDialogFragment"
             android:exported="true" />
     </application>
 

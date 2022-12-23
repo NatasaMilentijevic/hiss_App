@@ -25,6 +25,7 @@ class LoginPref(private var con: Context) {
         }
     }
 
+    // kasnije
     fun getUserDetails(): HashMap<String, String> {
         val user: Map<String, String> = HashMap()
         (user as HashMap).put(Constant.KEY_TOKEN, pref.getString(Constant.KEY_TOKEN, null)!!)
@@ -36,8 +37,6 @@ class LoginPref(private var con: Context) {
         editor.commit()
         val i = Intent(con, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-
         con.startActivity(i)
     }
 

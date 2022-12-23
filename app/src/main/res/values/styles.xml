@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="app_name" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="appName" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="text_input_default">
+    <style name="logoStyle">
+        <item name="android:padding">@dimen/small_size</item>
+
+    </style>
+    <style name="textInputDefault">
         <item name="font">@font/poppins_regular</item>
         <item name="hintTextColor">@color/colorTextHintDefault</item>
         <item name="android:textColor">@color/colorTextDefault</item>
+        <item name="android:padding">@dimen/space_small</item>
+        <item name="android:maxLines">1</item>
     </style>
 
-    <style name="button_primary">
+    <style name="buttonPrimary" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/bg_button_primary</item>
         <item name="android:textColor">@color/colorTextWhite</item>
-        <item name="android:layout_margin">@dimen/button_margin_size</item>
+        <item name="android:layout_margin">@dimen/small_size</item>
+        <item name="android:layout_marginTop">@dimen/space_default</item>
     </style>
 
-    <style name="text_label_default">
+    <style name="textLabelDefault">
         <item name="font">@font/poppins_regular</item>
         <item name="android:textColor">@color/colorTextDefault</item>
+        <item name="android:layout_margin">@dimen/space_default</item>
+        <item name="android:padding">@dimen/padding_small</item>
     </style>
 
 </resources>

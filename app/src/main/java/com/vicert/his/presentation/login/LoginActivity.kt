@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.vicert.his.HisApplication
-import com.vicert.his.data.api.login.ResetPasswordSheet
 import com.vicert.his.databinding.ActivityLoginBinding
 import com.vicert.his.presentation.base.ViewModelFactory
 import com.vicert.his.presentation.home.HomeActivity
@@ -17,14 +15,13 @@ import javax.inject.Inject
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
     private lateinit var session: LoginPref
 
     @Inject
     lateinit var loginVMFactory: ViewModelFactory<LoginActivityViewModel>
 
     private val viewModel: LoginActivityViewModel by viewModels { loginVMFactory }
-
-    private lateinit var forgotViewModel: LoginActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,24 +57,23 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonLogin.setOnClickListener {
-            val email = binding.editTextEmailAddress.text.toString().trim()
-            val pwd = binding.editTextPassword.text.toString().trim()
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmailLogin.text.toString().trim()
+            val pwd = binding.etPasswordLogin.text.toString().trim()
             viewModel.loginUser(email = email, pwd = pwd)
         }
-        forgotViewModel = ViewModelProvider(this).get(LoginActivityViewModel::class.java)
 
-        binding.buttonForgotPassword.setOnClickListener {
-            ResetPasswordSheet().show(supportFragmentManager, "forgotPasswordTag")
+        binding.btnForgotPassword.setOnClickListener {
+            ResetPasswordSheetDialogFragment().show(supportFragmentManager, "forgotPasswordTag")
         }
-
     }
 
     private fun showLoading() {
-        binding.progressBarLogin.visibility = View.VISIBLE
+        binding.pbLogin.visibility = View.VISIBLE
     }
 
     private fun stopLoading() {
-        binding.progressBarLogin.visibility = View.GONE
+        binding.pbLogin.visibility = View.GONE
     }
+
 }
