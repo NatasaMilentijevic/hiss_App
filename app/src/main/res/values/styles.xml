@@ -15,7 +15,7 @@
         <item name="font">@font/poppins_regular</item>
         <item name="hintTextColor">@color/colorTextHintDefault</item>
         <item name="android:textColor">@color/colorTextDefault</item>
-        <item name="android:padding">@dimen/space_small</item>
+        <item name="android:padding">@dimen/margin_small</item>
         <item name="android:maxLines">1</item>
     </style>
 
@@ -23,14 +23,21 @@
         <item name="android:background">@drawable/bg_button_primary</item>
         <item name="android:textColor">@color/colorTextWhite</item>
         <item name="android:layout_margin">@dimen/small_size</item>
-        <item name="android:layout_marginTop">@dimen/space_default</item>
+        <item name="android:layout_marginTop">@dimen/margin_normal</item>
     </style>
 
     <style name="textLabelDefault">
         <item name="font">@font/poppins_regular</item>
         <item name="android:textColor">@color/colorTextDefault</item>
-        <item name="android:layout_margin">@dimen/space_default</item>
+        <item name="android:layout_margin">@dimen/margin_default</item>
         <item name="android:padding">@dimen/padding_small</item>
+    </style>
+
+    <style name="titlesOnPage">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/margin_default</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/margin_normal</item>
     </style>
 
 </resources>

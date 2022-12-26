@@ -1,6 +1,5 @@
 package com.vicert.his.presentation.login
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -56,7 +55,7 @@ class LoginActivityViewModel(
         viewModelScope.launch {
             try {
                 if (!resetValidation(email, oldPassword, newPassword, confirmNewPassword)) {
-                   resetResult.postValue(ResetState.FailState("Invalid input. Password should be at least 8 characters long, " +
+                   resetResult.postValue(ResetState.FailState("Password should be at least 8 characters long, " +
                            "contain upper case, number and speciaal character"))
                 }else {
                     val resetRequest = ResetPasswordRequest(

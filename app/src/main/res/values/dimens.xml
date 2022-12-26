@@ -3,11 +3,6 @@
     <dimen name="input_default_size">18sp</dimen>
     <dimen name="small_size">8sp</dimen>
 
-    <dimen name="space_small">6dp</dimen>
-    <dimen name="space_normal">16dp</dimen>
-    <dimen name="space_default">24dp</dimen>
-    <dimen name="space_large">32dp</dimen>
-
     <dimen name="margin_small">6dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_default">24dp</dimen>
